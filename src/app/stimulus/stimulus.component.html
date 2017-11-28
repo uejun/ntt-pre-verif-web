@@ -1,0 +1,73 @@
+<div *ngIf="imageViewd" align="center">
+    <img [src]="currentImageSrc" alt="Smiley face" height="256" width="256">
+</div>
+<div *ngIf="imageViewd" #rb class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="emotion">
+            <mat-header-cell *matHeaderCellDef>Emotion</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.dname}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container *ngFor="let number of ['0','1','2','3','4','5','6','7','8','9','10']" [matColumnDef]="number">
+            <mat-header-cell *matHeaderCellDef> {{number}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <mat-radio-button [value]="number" [name]="element.name" (change)="onChanged($event)" [checked]="checked"></mat-radio-button>
+            </mat-cell>
+        </ng-container>
+
+        <!--<mat-header-row *matHeaderRowDef="displayedLabelColumns"></mat-header-row>-->
+        <!--<mat-row *matRowDef="let row; columns: displayedLabelColumns;"></mat-row>-->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
+<div>
+    <mat-toolbar>
+        <div align="center">
+            <button mat-button (click)="onOKClicked()" [disabled]="!okEnabled">OK</button>
+        </div>
+        <span *ngIf="isNotCleanAndNotFinished" style="color:red;">
+            未入力の行があります.
+        </span>
+        <span>
+            <button mat-button (click)="onReset()">最初から</button>
+        </span>
+    </mat-toolbar>
+</div>
+
+<!--<table>-->
+    <!--<thead>-->
+    <!--<tr>-->
+        <!--<th><pre>全く感じない</pre></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th><pre>非常に感じる</pre></th>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<th></th>-->
+        <!--<th *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]">{{number}} </th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr *ngFor="let emotion of emotions">-->
+       <!--<th>{{emotion.dname}}</th>-->
+        <!--<td *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]">-->
+            <!--<mat-radio-button [value]="number" [name]="emotion.name" (change)="onChanged($event)"></mat-radio-button>-->
+        <!--</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+
+<!--</table>-->
+
